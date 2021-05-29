@@ -10,7 +10,7 @@ import com.occ.name.scoring.entity.Name;
 import com.occ.name.scoring.intf.ScoreComputer;
 import com.occ.name.scoring.strategy.intf.NameScoringStrategy;
 
-public class ComputeScoreWithCompletableFuture implements ScoreComputer{
+public class ComputeScoreWithCompletableFuture implements ScoreComputer<List<Name>,NameScoringStrategy<Name,Long>>{
 	
 	private static final int NUM_OF_THREADS = 10;
 
@@ -19,7 +19,7 @@ public class ComputeScoreWithCompletableFuture implements ScoreComputer{
 	}
 	
 	@Override
-	public long computeTotalScore(List<Name> names,NameScoringStrategy nss) {
+	public Long computeTotalScore(List<Name> names,NameScoringStrategy<Name,Long> nss) {
 		
 		ExecutorService executor = Executors.newFixedThreadPool(Math.min(names.size(), NUM_OF_THREADS));
 		

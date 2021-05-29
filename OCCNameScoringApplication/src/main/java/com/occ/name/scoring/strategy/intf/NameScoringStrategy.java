@@ -1,9 +1,9 @@
 package com.occ.name.scoring.strategy.intf;
 
-import com.occ.name.scoring.entity.Name;
-public interface NameScoringStrategy {
+
+public interface NameScoringStrategy<T,U> {
 	
 	
-	public long computeScore(Name name);
+	public U computeScore(T name);
 
 }

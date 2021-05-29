@@ -1,12 +1,13 @@
 package com.occ.name.scoring.strategy.factory;
 
+import com.occ.name.scoring.entity.Name;
 import com.occ.name.scoring.strategy.impl.ComplexNameScoringStrategy;
 import com.occ.name.scoring.strategy.impl.SimpleNameScoringStrategy;
 import com.occ.name.scoring.strategy.intf.NameScoringStrategy;
 
 public class NameScoringStrategyFactory {
 
-	public static NameScoringStrategy getNameScoringStrategy(String type) {
+	public static NameScoringStrategy<Name,Long> getNameScoringStrategy(String type) {
 
 		if (type == null) {
             return null;

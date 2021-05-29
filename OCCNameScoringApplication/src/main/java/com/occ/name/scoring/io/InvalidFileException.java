@@ -3,15 +3,16 @@
  */
 package com.occ.name.scoring.io;
 
-import java.util.logging.Logger;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
  * @author loganathan
  *
  */
+@ResponseStatus(HttpStatus.BAD_REQUEST)
 public class InvalidFileException extends Exception {
 
-	private static final Logger LOG = Logger.getLogger(InvalidFileException.class.getName());
 	/**
 	 * 
 	 */

@@ -75,7 +75,8 @@ public class FileLoader {
 	 * @return {@link BufferedReader} to read through {@link byte Array}
      * @throws java.lang.Exception
 	 */
-	public BufferedReader getBufferedReader(final byte[] buffer) throws IOException,Exception {
+	public BufferedReader getBufferedReader(final byte[] buffer) throws InvalidFileException,IOException,Exception {
+		checkBytes(buffer);
 		ByteArrayInputStream isr = new ByteArrayInputStream(buffer);
 		InputStreamReader ip = new InputStreamReader(isr);
 		return new BufferedReader(ip);
@@ -95,6 +96,18 @@ public class FileLoader {
 			throw new InvalidFileException(FILE_NOT_FOUND.toString());
 		}
 		if (file.length() == 0) {
+			throw new InvalidFileException(FILE_IS_EMPTY.toString());
+		}
+	}
+	/**
+	 * Checks if the file empty or file is not found ,In Either Case InvalidFileException  is generated
+	 *
+     * @param file
+	
+     * @throws java.lang.Exception
+	 */
+	protected void checkBytes(final byte[] buffer) throws InvalidFileException {
+		if (buffer.length == 0) {
 			throw new InvalidFileException(FILE_IS_EMPTY.toString());
 		}
 	}

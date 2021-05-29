@@ -38,7 +38,7 @@ public class NamesBuilder {
 		
 		try {
 			return readIOStream(fileLoader.getBufferedReader(buffer));
-		}catch(IOException ex) {
+		}catch(IOException | InvalidFileException ex) {
 			//ex.printStackTrace();
 			throw ex;
 		}
