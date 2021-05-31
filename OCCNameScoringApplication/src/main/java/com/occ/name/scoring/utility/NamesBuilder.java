@@ -18,7 +18,7 @@ public class NamesBuilder {
 	
 	private static final java.util.logging.Logger log = java.util.logging.Logger.getLogger(NamesBuilder.class.getName());
 
-	public List<Name> loadAndBuildNames(String file)throws InvalidFileException,IOException,Exception { 
+	public List<Name> loadAndBuildNames(String file) throws InvalidFileException,IOException,Exception { 
 		FileLoader fileLoader = new FileLoader();
 		try {
 			return readIOStream(fileLoader.loadFile(new File(file)));
@@ -70,12 +70,12 @@ public class NamesBuilder {
 		
 		final AtomicLong counter = new AtomicLong();
 		return names.stream().map(fullName-> {
-			String[] name=fullName.split(" ");
+			String[] name=fullName.toUpperCase().split(" ");
 			if(name.length>1) {
-				return new Name(name[0],name[1]);
+				return new Name(name[0],name[1],0);
 			}
 			else {
-				return new Name(name[0],null);
+				return new Name(name[0],null,0);
 			}
 		}).sorted(Comparator.comparing(Name::getFirstName).thenComparing(Name::getLastName,Comparator.nullsFirst(Comparator.naturalOrder()))).map(name->
 		{

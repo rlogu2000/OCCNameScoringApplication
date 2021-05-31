@@ -32,7 +32,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler
     public final ResponseEntity<Object> handleSystemExceptions(InvalidFileException ex, WebRequest request) {
         List<String> details = new ArrayList<>();
         details.add(ex.getLocalizedMessage());
-        ErrorResponse error = new ErrorResponse("Bad Request", details);
+        ErrorResponse error = new ErrorResponse("Validation Failed", details);
         return new ResponseEntity(error, HttpStatus.BAD_REQUEST);
     }
     @Override

@@ -13,10 +13,11 @@ public class Name implements java.io.Serializable{
     public Name() {
 		
 	}
-    public Name(String firstName,String lastName) {
+    public Name(String firstName,String lastName,long orderNumber) {
 		
     	this.firstName=firstName;
     	this.lastName=lastName;
+    	this.orderNumber=orderNumber;
 	}
 
 	public String getFirstName() {

@@ -24,12 +24,12 @@ public class NameScoringCalculator {
 
 	private String file;
 	private String strategyType;
-	private NameScoringStrategy algorithm;
+	private NameScoringStrategy<Name,Long> algorithm;
 	
-	private NameScoringStrategy  getAlgorithm() {
+	private NameScoringStrategy<Name,Long>  getAlgorithm() {
 		return algorithm;
 	}
-	private void setAlgorithm(NameScoringStrategy algorithm) {
+	private void setAlgorithm(NameScoringStrategy<Name,Long> algorithm) {
 		this.algorithm=algorithm;
 	}
 	
@@ -56,7 +56,7 @@ public class NameScoringCalculator {
 		Instant startTime = Instant.now();
 		List<Name> names=buildNames(getFile());
 		
-		ScoreComputer sc=new ComputeScoreWithStream();
+		ScoreComputer<List<Name>,NameScoringStrategy<Name,Long>> sc=new ComputeScoreWithStream();
 		long sum =sc.computeTotalScore(names, getAlgorithm());
 		
 		Instant endTime = Instant.now();
@@ -67,7 +67,7 @@ public class NameScoringCalculator {
 	public long computeScoreInParallelMode() {
 		Instant startTime = Instant.now();
 		List<Name> names=buildNames(getFile());
-		ScoreComputer sc=new ComputeScoreWithParallelStream();
+		ScoreComputer<List<Name>,NameScoringStrategy<Name,Long>> sc=new ComputeScoreWithParallelStream();
 		long sum =sc.computeTotalScore(names, getAlgorithm());
 		Instant endTime = Instant.now();
 		printDuration("Parallel Stream",names.size(),sum,startTime, endTime);
@@ -77,7 +77,7 @@ public class NameScoringCalculator {
 				
 		Instant startTime = Instant.now();
 		List<Name> names=(withNames!=null)?withNames:buildNames(getFile());
-		ScoreComputer sc=new ComputeScoreWithParallelStream();
+		ScoreComputer<List<Name>,NameScoringStrategy<Name,Long>> sc=new ComputeScoreWithParallelStream();
 		long sum =sc.computeTotalScore(names, getAlgorithm());
 		Instant endTime = Instant.now();
 		printDuration("Parallel Stream",names.size(),sum,startTime, endTime);
@@ -86,7 +86,7 @@ public class NameScoringCalculator {
 	public long computeScoreWithCompletableFuture() {
 		Instant startTime = Instant.now();
 		List<Name> names=buildNames(getFile());
-		ScoreComputer sc=new ComputeScoreWithCompletableFuture();
+		ScoreComputer<List<Name>,NameScoringStrategy<Name,Long>> sc=new ComputeScoreWithCompletableFuture();
 		long sum =sc.computeTotalScore(names, getAlgorithm());
 		Instant endTime = Instant.now();
 		printDuration("CompletableFuture",names.size(),sum,startTime, endTime);
@@ -111,8 +111,4 @@ public class NameScoringCalculator {
 		log.log(Level.INFO,"Type : "+type+", Processed "+size+" Names in "+timeElapsed.toMillis()+" MilliSeconds and the sum is "+sum+"\n");
 	}
 	
-	
-
-	
-
 }

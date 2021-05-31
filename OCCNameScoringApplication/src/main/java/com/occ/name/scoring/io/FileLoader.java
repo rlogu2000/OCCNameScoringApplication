@@ -35,6 +35,18 @@ public class FileLoader {
 		MappedByteBuffer mByteBuffer = loadDataFile(dataFile);
 		return getBufferedReader(mByteBuffer);
 	}
+	
+	/**
+     * @param byte[] buffer
+	 * @return {@link BufferedReader} to read through {@link byte Array}
+     * @throws java.lang.Exception
+	 */
+	public BufferedReader getBufferedReader(final byte[] buffer) throws InvalidFileException,IOException,Exception {
+		checkBytes(buffer);
+		ByteArrayInputStream isr = new ByteArrayInputStream(buffer);
+		InputStreamReader ip = new InputStreamReader(isr);
+		return new BufferedReader(ip);
+	}
 
     /**
      *
@@ -70,20 +82,6 @@ public class FileLoader {
 		return new BufferedReader(ip);
 	}
 	
-	/**
-     * @param byte[] buffer
-	 * @return {@link BufferedReader} to read through {@link byte Array}
-     * @throws java.lang.Exception
-	 */
-	public BufferedReader getBufferedReader(final byte[] buffer) throws InvalidFileException,IOException,Exception {
-		checkBytes(buffer);
-		ByteArrayInputStream isr = new ByteArrayInputStream(buffer);
-		InputStreamReader ip = new InputStreamReader(isr);
-		return new BufferedReader(ip);
-	}
-	
-	
-
 	/**
 	 * Checks if the file empty or file is not found ,In Either Case InvalidFileException  is generated
 	 *

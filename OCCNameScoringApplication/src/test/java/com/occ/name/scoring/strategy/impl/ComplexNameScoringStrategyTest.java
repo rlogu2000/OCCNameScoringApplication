@@ -33,9 +33,8 @@ class ComplexNameScoringStrategyTest {
 	@DisplayName("ComplexNameScoringStrategy does not have implementation ,So it should throw UnSupportedOperationException")
     public void testExceptionIsThrown() {
 		ComplexNameScoringStrategy tester = new ComplexNameScoringStrategy();
-		Name name=new Name("AJAY","KUMAR");
-		name.setOrderNumber(1);
-        assertThrows(UnsupportedOperationException.class,()->tester.computeScore(name));
+		Name name=new Name("AJAY","KUMAR",1);
+	    assertThrows(UnsupportedOperationException.class,()->tester.computeScore(name));
     }
 
 }
